@@ -1,6 +1,6 @@
 # MobileRobotROSGazeboSimulation
 This repo relate to a real robot which design in Gazebo and controlled by Gazebo and ROS plugins. 
-[Also you can follow me on linkdin](www.linkedin.com/in/morteza-aliyari-1609a1107)
+[Also you can follow me on linkdin page](www.linkedin.com/in/morteza-aliyari-1609a1107)
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 This project is related to a real Two-Wheeled Mobile Robot but at the first step, it was designed at  Gazebo Environment. This project will help you explore features and tools provided by ROS (Robot Operating System). We start building the robot from the scratch, using URDF (Unified Robot Description Format) and RViz to visualize it. Further, we describe the inertia and show how to simplify the URDF using XACROS. Later, motion planning algorithms, such as Obstacle Avoidance and robot_localization methods will be used to create a map in order to path planning the robot to our goal point.

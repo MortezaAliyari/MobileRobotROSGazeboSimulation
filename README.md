@@ -12,5 +12,5 @@ Here's what you will accomplish in this tutorial:
 - [x] Work with RVIZ environmnet 
 - [x] Create MAP of your envirnment with Gmapping Method
 - [x] Find optimal path from your robot position to goal point
-I used Gazebo11, ROS Noetic version, and Ubuntu focal disterbution in this project.Three programming language was used included 
+I used Gazebo11, ROS Noetic version, and Ubuntu focal disterbution in this project.Three programming language was used included. 
 

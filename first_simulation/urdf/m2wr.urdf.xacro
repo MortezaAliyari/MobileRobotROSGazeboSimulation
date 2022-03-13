@@ -1,0 +1,164 @@
+<?xml version="1.0" ?>
+
+<robot name="m2wr" xmlns:xacro="https://www.ros.org/wiki/xacro" >
+    <xacro:include filename="$(find first_simulation)/urdf/m2wr.gazebo.xacro"/>
+    <xacro:include filename="$(find first_simulation)/urdf/common_properties.xacro"/>
+
+    <link name="base_footprint"/>
+
+    <joint name="base_footprint_joint" type="fixed">
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.1"/>
+        <parent link="base_footprint" />
+        <child link="link_chassis" />
+    </joint>
+
+    <link name="link_chassis">
+    <!-- pose and inertial -->
+        <inertial>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <mass value="8.2573504e-01"/>
+          <inertia ixx="2.2124416e-03" ixy="-1.2294101e-05" ixz="3.4938785e-05"
+                   iyy="2.1193702e-03" iyz="-5.0120904e-06"
+                   izz="2.0064271e-03" />
+        </inertial>
+
+
+        <collision name="collision_chassis">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+            <box size="0.5 0.3 0.01"/>
+            </geometry>
+        </collision>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.5 0.3 0.01"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="joint_caster_front" type="fixed">
+      <parent link="link_chassis"/>
+      <child link="caster_front_link"/>
+      <origin xyz="0.2 0 -0.055" rpy="-1.57 0 0"/>
+    </joint>
+    <link name="caster_front_link">
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+              <sphere radius="0.05"/>
+            </geometry>
+        </collision>
+      <visual>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <geometry>
+            <sphere radius="0.05"/>
+          </geometry>
+      </visual>
+      <inertial>
+        <origin xyz="0 0 0" />
+        <mass value="0.1" />
+        <inertia ixx="0.01" ixy="0.0" ixz="0.0"
+                 iyy="0.01" iyz="0.0"
+                 izz="0.01" />
+      </inertial>
+    </link>
+    <joint name="joint_right_wheel" type="continuous">
+
+        <parent link="link_chassis"/>
+        <child link="link_right_wheel" />
+        <origin rpy="1.57 0 0" xyz="-0.15 -0.175 0.0"/>
+        <axis rpy="0.0 0.0 0.0" xyz="0.0 0.0 -1.0"/>
+    </joint>
+    <link name="link_right_wheel">
+
+        <inertial>
+            <origin rpy="0 0 0"  xyz="0 0 0"/>
+            <mass value="2.8498940e-02" />
+            <inertia ixx="1.1175580e-05" ixy="-4.2369783e-11" ixz="-5.9381719e-09"
+                     iyy="1.1192413e-05" iyz="-1.4400107e-11"
+                     izz="2.0712558e-05" />
+        </inertial>
+
+        <collision name="link_right_wheel_collision">
+            <origin rpy="0 0 0"  xyz="0 0 0"/>
+            <geometry>
+                <cylinder length="0.04" radius="0.1"/>
+            </geometry>
+        </collision>
+
+        <visual name="link_right_wheel_visual">
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <cylinder length="0.04" radius="0.1"/>
+            </geometry>
+        </visual>
+
+    </link>
+    <joint name="joint_left_wheel" type="continuous">
+
+        <parent link="link_chassis"/>
+        <child link="link_left_wheel" />
+        <origin rpy="1.57 0 0" xyz="-0.15 0.175 0.0"/>
+        <axis rpy="0.0 0.0 0.0" xyz="0.0 0.0 -1.0"/>
+    </joint>
+    <link name="link_left_wheel">
+
+        <inertial>
+            <origin rpy="0 0 0"  xyz="0 0 0"/>
+            <mass value="2.8498940e-02" />
+            <inertia ixx="1.1175580e-05" ixy="-4.2369783e-11" ixz="-5.9381719e-09"
+                     iyy="1.1192413e-05" iyz="-1.4400107e-11"
+                     izz="2.0712558e-05" />
+        </inertial>
+
+        <collision name="link_left_wheel_collision">
+            <origin rpy="0 0 0"  xyz="0 0 0"/>
+            <geometry>
+                <cylinder length="0.04" radius="0.1"/>
+            </geometry>
+        </collision>
+
+        <visual name="link_left_wheel_visual">
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <cylinder length="0.04" radius="0.1"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="joint_imu" type="fixed">
+      <parent link="link_chassis"/>
+      <child link="imu_link"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+    <link name="imu_link"/>
+
+    <joint name="joint_sensor_laser" type="fixed">
+        <origin xyz="0.2 0 0.04" rpy="0.0 0.0 0.0"/>
+        <parent link="link_chassis"/>
+        <child link="hokuyo_link"/>
+    </joint>
+    <link name="hokuyo_link">
+        <pose>0 0 0 0 0 0</pose>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.05 0.05 0.1" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://first_simulation/meshes/hokuyo.dae"/>
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="1e-5" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+        </inertial>
+    </link>
+
+
+
+</robot>
